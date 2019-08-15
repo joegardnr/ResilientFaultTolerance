@@ -3,7 +3,31 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PollyDemoApp", "PollyDemoApp\PollyDemoApp.csproj", "{713AA5A7-FCCA-4C9A-A059-3E3077F3C45C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PollyDemo.Tests", "PollyDemo.Tests\PollyDemo.Tests.csproj", "{9AE2C159-8C61-4BA1-B52E-7E173302ABE3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnreliableHttpService", "UnreliableHttpService\UnreliableHttpService.csproj", "{79A78DEE-8FEF-44A1-8AE4-027396028E1B}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{713AA5A7-FCCA-4C9A-A059-3E3077F3C45C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{713AA5A7-FCCA-4C9A-A059-3E3077F3C45C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{713AA5A7-FCCA-4C9A-A059-3E3077F3C45C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{713AA5A7-FCCA-4C9A-A059-3E3077F3C45C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AE2C159-8C61-4BA1-B52E-7E173302ABE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AE2C159-8C61-4BA1-B52E-7E173302ABE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AE2C159-8C61-4BA1-B52E-7E173302ABE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AE2C159-8C61-4BA1-B52E-7E173302ABE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79A78DEE-8FEF-44A1-8AE4-027396028E1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79A78DEE-8FEF-44A1-8AE4-027396028E1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79A78DEE-8FEF-44A1-8AE4-027396028E1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79A78DEE-8FEF-44A1-8AE4-027396028E1B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
