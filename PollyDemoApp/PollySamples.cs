@@ -66,7 +66,7 @@ namespace PollyDemoApp
         {
             var policy = Policy
                           .Handle<Exception>()
-                          .RetryForever((ex) =>
+                          .RetryForever(onRetry: (ex) =>
                             {
                                 Program.ResultsLog.Fail++;
                             });
@@ -91,7 +91,7 @@ namespace PollyDemoApp
         {
             var policy = Policy<int>
                           .Handle<Exception>()
-                          .RetryForever((dr) =>
+                          .RetryForever(onRetry: (dr) =>
                           {
                               Program.ResultsLog.Fail++;
                           });
@@ -182,11 +182,7 @@ namespace PollyDemoApp
 
             for (int i = 1; i <= 20; i++)
             {                
-                var response = policyWrap.Execute(() =>
-                {
-                    return _service.MostlyBad(i);
-                    
-                });
+                var response = policyWrap.Execute(() => _service.MostlyBad(i));
                 if(response == i) { Program.ResultsLog.Success++; }
                 else if(response == -1) { Program.ResultsLog.Fail++; }
                 
@@ -203,6 +199,10 @@ namespace PollyDemoApp
         {
             var threshold = 3; var wait = 100; var durationOfBreak = TimeSpan.FromSeconds(30);          
 
+            var circuitBreakerPolicy = Policy<int>
+                                        .Handle<Exception>()
+                                        .CircuitBreaker(threshold, durationOfBreak);
+
             var retryPolicy = Policy<int>
                                .Handle<Exception>()
                                .WaitAndRetryForever(
@@ -211,11 +211,7 @@ namespace PollyDemoApp
                                 {
                                     if (dr.Exception is BrokenCircuitException) { Program.ResultsLog.Skipped++; }
                                     else { Program.ResultsLog.Fail++; }
-                                });
-
-            var circuitBreakerPolicy = Policy<int>
-                                        .Handle<Exception>()
-                                        .CircuitBreaker(threshold, durationOfBreak);
+                                });            
 
             var policyWrap = Policy.Wrap(retryPolicy, circuitBreakerPolicy);
 

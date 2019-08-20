@@ -22,8 +22,8 @@ namespace PollyDemoApp
             var samples = new PollySamples();
             samples.NoPolly_IntermittentlyBad();
             //samples.RetryForever();
-
             //samples.RetryForever_WithAccurateLogging();
+            
             //samples.RetryForever_WithAccurateLogging_And_ReturnType();
             //samples.WaitAndRetry();
             //samples.WaitAndRetry_Escalating();
@@ -50,7 +50,8 @@ namespace PollyDemoApp
             Console.WriteLine($"Skipped Attempts:    {ResultsLog.Skipped}");
             Console.WriteLine("------------------------------------------------");
             Console.WriteLine("Polly Demo END!");
-            Console.WriteLine("------------------------------------------------");            
+            Console.WriteLine("------------------------------------------------");
+            await Task.Delay(0);  // Avoid a warn while running the sync samples.
         }
 
         /// <summary>

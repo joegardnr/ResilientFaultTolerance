@@ -57,6 +57,10 @@ namespace PollyDemoApp
         {
             var threshold = 3; var wait = 100; var durationOfBreak = TimeSpan.FromSeconds(30);
 
+            var circuitBreakerPolicy = HttpPolicyExtensions
+                                        .HandleTransientHttpError()
+                                        .CircuitBreakerAsync(threshold, durationOfBreak);
+
             var retryPolicy = HttpPolicyExtensions
                                .HandleTransientHttpError()
                                .Or<BrokenCircuitException>()
@@ -67,10 +71,6 @@ namespace PollyDemoApp
                                     if (dr.Exception is BrokenCircuitException) { Program.ResultsLog.Skipped++; }
                                     else { Program.ResultsLog.Fail++; }
                                 });
-
-            var circuitBreakerPolicy = HttpPolicyExtensions
-                                        .HandleTransientHttpError()
-                                        .CircuitBreakerAsync(threshold, durationOfBreak);
 
             var policyWrap = Policy.WrapAsync(retryPolicy, circuitBreakerPolicy);
 

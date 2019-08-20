@@ -28,7 +28,8 @@ namespace PollyDemo.Tests
         public string UseRegistry(int input)
         {
             var policy = _registry.Get<ISyncPolicy>("DefaultRetry");
-            var response = policy.Execute(() => dbContext.First(r => r.Key == input));
+            var response = policy.Execute(
+                () => dbContext.First(r => r.Key == input));
             return response.Value;
         }
 
@@ -49,7 +50,7 @@ namespace PollyDemo.Tests
         }
 
         /// <summary>
-        /// Thie policy could be anything, including NoOp.
+        /// This policy could be anything, including NoOp.
         /// </summary>
         /// <param name="input"></param>
         /// <param name="policy"></param>
