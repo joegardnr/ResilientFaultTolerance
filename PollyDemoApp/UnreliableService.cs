@@ -31,6 +31,17 @@ namespace PollyDemoApp
             return requestValue;
         }
 
+        public int UnexpectedResult(int requestValue)
+        {
+            RequestCount++;
+            Thread.Sleep(StandardDelay);
+            if (RequestCount % IntermittentBadMod != 0)
+            {
+                return -1 * requestValue; // Unexpected value (negative)
+            }
+            return requestValue;
+        }
+
         public class BadException : Exception
         {
             public BadException(string message) : base(message) { }                

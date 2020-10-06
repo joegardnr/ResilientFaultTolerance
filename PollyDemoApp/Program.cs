@@ -25,6 +25,7 @@ namespace PollyDemoApp
             //samples.RetryForever_WithAccurateLogging();
             
             //samples.RetryForever_WithAccurateLogging_And_ReturnType();
+            //samples.RetryForever_WithAccurateLogging_And_UnExpectedResults();
             //samples.WaitAndRetry();
             //samples.WaitAndRetry_Escalating();
 

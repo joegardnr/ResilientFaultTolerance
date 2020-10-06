@@ -106,6 +106,30 @@ namespace PollyDemoApp
         }
 
         /// <summary>
+        /// What if the response is not an error, but still a "Bad" value?
+        /// </summary>
+        /// <returns></returns>
+        public void RetryForever_WithAccurateLogging_And_UnExpectedResults()
+        {
+            var policy = Policy<int>
+                          .Handle<Exception>()
+                          .OrResult((result) => (result < 0))  // treat a negative result like an error
+                          .RetryForever(onRetry: (dr) =>
+                          {
+                              Program.ResultsLog.Fail++;
+                              //Console.WriteLine($"ERROR! Result: {dr.Result}");
+                          });
+
+            for (int i = 1; i <= 20; i++)
+            {
+                var response = policy.Execute(() => _service.UnexpectedResult(i));
+                
+                if (response == i) { Program.ResultsLog.Success++; }                
+                //Console.WriteLine($"Request {i} | Response {response}");
+            }
+        }
+
+        /// <summary>
         /// Sometimes you need a little delay between tries.
         /// </summary>
         /// <returns></returns>
