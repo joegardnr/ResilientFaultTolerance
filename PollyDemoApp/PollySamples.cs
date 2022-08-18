@@ -42,14 +42,13 @@ namespace PollyDemoApp
         /// <returns></returns>
         public void RetryForever()
         {
-            var policy = Policy
-                          .Handle<Exception>()
-                          .RetryForever();
-
             for (int i = 1; i <= 20; i++)
             {
                 int response = -1;
-                policy.Execute(() =>
+                Polly.Policy
+                 .Handle<Exception>()
+                 .RetryForever()
+                 .Execute(() =>
                 {
                     response = _service.MostlyBad(i);
                     Program.ResultsLog.Success++;

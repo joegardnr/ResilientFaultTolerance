@@ -10,7 +10,7 @@ namespace PollyDemo.Tests
         public void Test_Using_Registry()
         {
             // Arrange
-            var registry = new PolicyRegistry();  // You could also Mock IPolicyRegistry if you wanted.
+            var registry = new PolicyRegistry();  // You could also Mock IPolicyRegistry if you wanted (but why?).
             registry.Add("DefaultRetry", Policy.NoOp());  
             
             var reliableService = new ReliableService(registry);
